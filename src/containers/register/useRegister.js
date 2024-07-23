@@ -1,19 +1,21 @@
 import callApi from "@/helpers/network";
-import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 const useRegister = () => {
-  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
-  const register = async (payload) => {
-    try {
-      setLoading(true);
-      await callApi.post("/auth/register", payload);
-    } catch (error) {
-      console.log("error");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { mutateAsync: register, isPending: loading } = useMutation({
+    mutationKey: ["register"],
+    mutationFn: async (payload) =>
+      await callApi.post("/auth/register", payload),
+    onError(err) {
+      console.log("err register > ", err);
+    },
+    onSuccess() {
+      router.replace("/login");
+    },
+  });
 
   return {
     register,
