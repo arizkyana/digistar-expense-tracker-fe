@@ -1,5 +1,6 @@
 "use client";
 
+import { Navigation } from "@/components/navigation/navigation";
 import { logout } from "@/helpers/auth";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +14,7 @@ const Home = () => {
 
   return (
     <div>
-      Home Container
+      <Navigation />
       <div>
         <button type="button" onClick={handleLogout}>
           logout

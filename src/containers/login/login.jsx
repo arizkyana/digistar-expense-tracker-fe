@@ -5,9 +5,11 @@ import useLogin from "./useLogin";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginSchema } from "./validation";
-import cn from "@/helpers/cn";
+import { cn } from "@/lib/utils";
 
-const Login = () => {
+import { Input } from "@/components/ui/input";
+
+function Login() {
   const { login, loading } = useLogin();
 
   const { register, handleSubmit } = useForm({
@@ -44,32 +46,29 @@ const Login = () => {
           <form className="my-3 w-full" onSubmit={handleSubmit(login)}>
             {/* email */}
             <label htmlFor="email" className="block w-full mb-3">
-              <span className="block text-sm mb-1">Email</span>
-              <div className="border rounded">
-                <input
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="Masukkan email anda"
-                  className="w-full outline-none p-2 rounded"
-                  {...register("email")}
-                />
-              </div>
+              <span className="block text-sm mb-2">Email</span>
+              <Input
+                id="email"
+                type="email"
+                name="email"
+                placeholder="Masukkan email anda"
+                className="block"
+                {...register("email")}
+              />
             </label>
 
             {/* password */}
             <label htmlFor="password" className="block w-full mb-3">
-              <span className="block text-sm mb-1">Password</span>
-              <div className="border rounded">
-                <input
-                  id="password"
-                  type="password"
-                  name="password"
-                  placeholder="Masukkan password anda"
-                  className="w-full outline-none p-2 rounded"
-                  {...register("password")}
-                />
-              </div>
+              <span className="block text-sm mb-2">Password</span>
+
+              <Input
+                id="password"
+                type="password"
+                name="password"
+                placeholder="Masukkan password anda"
+                className="block"
+                {...register("password")}
+              />
             </label>
 
             <div className="my-7"></div>
@@ -91,6 +90,8 @@ const Login = () => {
       </div>
     </div>
   );
-};
+}
+
+Login.propTypes = {};
 
 export default Login;
